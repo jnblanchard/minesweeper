@@ -27,9 +27,12 @@ class _GameBoardState extends State<GameBoard> {
         var cell = GestureDetector(onSecondaryTapDown: (_) => boardProvider.flag(Point(i, j)),
                                    onDoubleTap: () => boardProvider.flag(Point(i, j)),
                                    onLongPress: () => boardProvider.flag(Point(i, j)),
-                                   child: MaterialButton(child: Text(label),
-                                          onPressed: () => boardProvider.tap(Point(i, j)),
-                                          color: Colors.grey[200]));
+                                   onTap: () => boardProvider.tap(Point(i, j)),
+                                   child: Container(child: Center(child: Text(label)),
+                                                    margin: EdgeInsets.all(3),
+                                                    width:  30,
+                                                    height: 30,
+                                                    color: Colors.grey[200]));
 
         tiles.add(cell);
       }

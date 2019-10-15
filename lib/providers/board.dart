@@ -26,7 +26,7 @@ class Board with ChangeNotifier {
     this.width = width;
     this.mines = mines;
 
-    _gameTimer.cancel();
+    if (_gameTimer != null) _gameTimer.cancel();
     secondsGoneBy = 0;
 
     mineLocations = [];
@@ -36,15 +36,18 @@ class Board with ChangeNotifier {
     board = List<List<String>>.generate(height, (i) => List<String>.generate(width, (j) => ""));
 
     notifyListeners();
+
   }
 
   _showMines() {
+
     isBlownUp = true;
     for (var i = 0; i < mines; i++) {
       Point mine = mineLocations[i];
       board[mine.x][mine.y] = "M";
       notifyListeners();
     }
+
   }
 
   _sweep(Point location) {
@@ -70,6 +73,15 @@ class Board with ChangeNotifier {
 
     board[location.x][location.y] = sweepCount.toString();
 
+    int emptySquares = 0;
+    for (var i = 0; i < width; i++) {
+      for (var j = 0; j < height; j++) {
+        if (board[i][j].compareTo("") == 0 && !mineLocations.contains(Point(i, j))) emptySquares += 1;
+      }
+    }
+
+    if (emptySquares == 0) _gameTimer.cancel();
+
     notifyListeners();
 
     // Open a square w/ 0 bomb neighbors, open all neighbors.
@@ -83,7 +95,6 @@ class Board with ChangeNotifier {
       _sweep(topRight);
       _sweep(bottomRight);
     }
-
 
   }
 
@@ -111,6 +122,7 @@ class Board with ChangeNotifier {
   }
 
   tap(Point location) {
+
     if (mineLocations.isEmpty) {
       _gameTimer = Timer.periodic(Duration(seconds: 1), (time) {
         secondsGoneBy = time.tick;
@@ -132,6 +144,7 @@ class Board with ChangeNotifier {
   }
 
   flag(Point location) {
+
     if (_gameTimer != null) {
       if (flagLocations.contains(location)) {
         board[location.x][location.y] = "";
@@ -145,7 +158,6 @@ class Board with ChangeNotifier {
           for (var i = 0; i < flagLocations.length; i++) {
             var flagLocation = flagLocations[i];
             if (!mineLocations.contains(flagLocation)) {
-              isBlownUp = true;
               _showMines();
               return;
             }
@@ -156,6 +168,7 @@ class Board with ChangeNotifier {
       }
       notifyListeners();
     }
+
   }
 
 

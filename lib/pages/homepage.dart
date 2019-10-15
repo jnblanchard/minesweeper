@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:minesweeper/views/top_board.dart';
 import 'package:minesweeper/views/game_board.dart';
+import 'package:minesweeper/views/alter_board.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,7 +12,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
 
-    var gameCol = Column(children: <Widget>[TopBoard(), GameBoard()]);
+    var gameCol = Column(children: <Widget>[TopBoard(), GameBoard(), AlterBoard()]);
 
     return Scaffold(body: gameCol);
   }
