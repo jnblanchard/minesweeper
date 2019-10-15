@@ -1,0 +1,43 @@
+import 'package:flutter/material.dart';
+import 'package:minesweeper/providers/board.dart';
+import 'package:provider/provider.dart';
+import 'dart:math';
+
+class GameBoard extends StatefulWidget {
+  @override
+  _GameBoardState createState() => _GameBoardState();
+}
+
+class _GameBoardState extends State<GameBoard> {
+  @override
+  Widget build(BuildContext context) {
+
+    var boardProvider = Provider.of<Board>(context);
+
+    List<Row> rows = [];
+    for (var i = 0; i < boardProvider.height; i++) {
+
+      List<Widget> tiles = [];
+      for(var j = 0; j < boardProvider.width; j++) {
+
+        var cellData = boardProvider.board[i][j];
+
+        var label = cellData.compareTo("M") == 0 && !boardProvider.isBlownUp ? "" : cellData;
+
+        var cell = GestureDetector(onSecondaryTapDown: (_) => boardProvider.flag(Point(i, j)),
+                                   onDoubleTap: () => boardProvider.flag(Point(i, j)),
+                                   onLongPress: () => boardProvider.flag(Point(i, j)),
+                                   child: MaterialButton(child: Text(label),
+                                          onPressed: () => boardProvider.tap(Point(i, j)),
+                                          color: Colors.grey[200]));
+
+        tiles.add(cell);
+      }
+
+      Row row = Row(mainAxisAlignment: MainAxisAlignment.center, children: tiles);
+      rows.add(row);
+    }
+
+    return Column(children: rows);
+  }
+}
