@@ -9,12 +9,11 @@ environment:
 dependencies:
   flutter_web: any
   flutter_web_ui: any
-
-  provider: ^3.1.0
+  provider: any
 
 dev_dependencies:
-  build_runner: ^1.6.2
-  build_web_compilers:
+  build_runner: ^1.4.0
+  build_web_compilers: ^2.0.0
 
 dependency_overrides:
   flutter_web:
@@ -31,7 +30,3 @@ dependency_overrides:
     git:
       url: https://github.com/kevmoo/provider
       ref: flutter_web
-
-flutter:
-
-  uses-material-design: true

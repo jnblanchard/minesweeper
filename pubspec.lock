@@ -28,7 +28,7 @@ packages:
       name: async
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.3.0"
+    version: "2.4.0"
   bazel_worker:
     dependency: transitive
     description:
@@ -63,7 +63,7 @@ packages:
       name: build_modules
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.2"
+    version: "2.6.1"
   build_resolvers:
     dependency: transitive
     description:
@@ -91,7 +91,7 @@ packages:
       name: build_web_compilers
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.6.3"
+    version: "2.5.1"
   built_collection:
     dependency: transitive
     description:
@@ -133,7 +133,7 @@ packages:
       name: collection
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.14.11"
+    version: "1.14.12"
   convert:
     dependency: transitive
     description:
@@ -484,4 +484,4 @@ packages:
     source: hosted
     version: "2.2.0"
 sdks:
-  dart: ">=2.5.0 <3.0.0"
+  dart: ">=2.4.0 <3.0.0"
