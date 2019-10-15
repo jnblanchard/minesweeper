@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+import 'package:flutter_web/material.dart';
 import 'package:minesweeper/views/top_board.dart';
 import 'package:minesweeper/views/game_board.dart';
 import 'package:minesweeper/views/alter_board.dart';
