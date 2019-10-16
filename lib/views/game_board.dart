@@ -17,7 +17,7 @@ class _GameBoardState extends State<GameBoard> {
     List<Row> rows = [];
     for (var i = 0; i < boardProvider.height; i++) {
 
-      List<Widget> tiles = [];
+      List<Widget> cells = [];
       for(var j = 0; j < boardProvider.width; j++) {
 
         var cellData = boardProvider.board[i][j];
@@ -34,13 +34,15 @@ class _GameBoardState extends State<GameBoard> {
                                                     height: 30,
                                                     color: Colors.grey[200]));
 
-        tiles.add(cell);
+        cells.add(cell);
       }
 
-      Row row = Row(mainAxisAlignment: MainAxisAlignment.center, children: tiles);
+      Row row = Row(mainAxisAlignment: MainAxisAlignment.center, children: cells);
       rows.add(row);
+
     }
 
     return Column(children: rows);
   }
+
 }
