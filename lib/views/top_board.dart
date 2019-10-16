@@ -26,5 +26,7 @@ class _TopBoardState extends State<TopBoard> {
     var row = Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: <Widget>[scoreLabel, boardStateButton, timeLabel]);
 
     return row;
+
   }
+
 }
