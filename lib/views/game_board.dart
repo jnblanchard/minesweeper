@@ -35,6 +35,7 @@ class _GameBoardState extends State<GameBoard> {
                                                     color: Colors.grey[200]));
 
         cells.add(cell);
+
       }
 
       Row row = Row(mainAxisAlignment: MainAxisAlignment.center, children: cells);
@@ -43,6 +44,7 @@ class _GameBoardState extends State<GameBoard> {
     }
 
     return Column(children: rows);
+
   }
 
 }
