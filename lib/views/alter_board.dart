@@ -44,4 +44,5 @@ class _AlterBoardState extends State<AlterBoard> {
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[_padding, widthField, _padding, heightField, _padding, mineField, _padding, setButton]);
 
   }
+
 }
