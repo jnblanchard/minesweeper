@@ -16,16 +16,18 @@ class _AlterBoardState extends State<AlterBoard> {
 
   get _padding => Padding(padding: EdgeInsets.all(10));
 
+  Widget _field(TextEditingController controller, String placeholder) => Container(width: 70, child: TextField(controller: controller, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: placeholder)));
+
   @override
   Widget build(BuildContext context) {
 
     Board board = Provider.of<Board>(context);
 
-    var widthField = Container(width: 70, child: TextField(controller: widthText, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: "width")));
+    var widthField = _field(widthText, "width");
 
-    var heightField = Container(width: 70, child: TextField(controller: heightText, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: "height")));
+    var heightField = _field(heightText, "height");
 
-    var mineField = Container(width: 70, child: TextField(controller: mineText, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: "mines")));
+    var mineField = _field(mineText, "mines");
 
     var setButton = MaterialButton(child: Text("set"), color: Colors.grey[300], onPressed: () {
 
@@ -36,6 +38,7 @@ class _AlterBoardState extends State<AlterBoard> {
       var mines = int.tryParse(mineText.text.toString()) ?? 10;
 
       board.changeBoard(width: width, height: height, mines: mines);
+
     });
 
     return Row(mainAxisAlignment: MainAxisAlignment.center, children: <Widget>[_padding, widthField, _padding, heightField, _padding, mineField, _padding, setButton]);
