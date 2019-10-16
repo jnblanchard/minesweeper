@@ -4,10 +4,6 @@ import 'dart:math';
 
 class Board with ChangeNotifier {
 
-  // beginner       9x9 w/10
-  // intermediate   16x16 w/ 40
-  // expert         16x30 w/ 99
-  // custom         hxw w/ m
   int height = 9;
   int width = 9;
   int mines = 10;
@@ -22,6 +18,7 @@ class Board with ChangeNotifier {
   List<List<String>> board = List<List<String>>.generate(9, (i) => List<String>.generate(9, (j) => ""));
 
   changeBoard({int height = 9, int width = 9, int mines = 10}) {
+
     this.height = height;
     this.width = width;
     this.mines = mines;
@@ -45,8 +42,9 @@ class Board with ChangeNotifier {
     for (var i = 0; i < mines; i++) {
       Point mine = mineLocations[i];
       board[mine.x][mine.y] = "M";
-      notifyListeners();
     }
+    _gameTimer.cancel();
+    notifyListeners();
 
   }
 
@@ -54,9 +52,7 @@ class Board with ChangeNotifier {
 
     bool isOnBoard = location.x >= 0 && location.x < width && location.y >= 0 && location.y < height;
 
-    if (!isOnBoard || mineLocations.contains(location) || flagLocations.contains(location) || board[location.x][location.y].compareTo("") != 0 ) {
-      return;
-    }
+    if (!isOnBoard || mineLocations.contains(location) || flagLocations.contains(location) || board[location.x][location.y].compareTo("") != 0 ) return;
 
     final left = Point(location.x-1, location.y);
     final right = Point(location.x+1, location.y);
@@ -80,9 +76,10 @@ class Board with ChangeNotifier {
       }
     }
 
-    if (emptySquares == 0) _gameTimer.cancel();
-
-    notifyListeners();
+    if (emptySquares == 0) {
+      _gameTimer.cancel();
+      return;
+    }
 
     // Open a square w/ 0 bomb neighbors, open all neighbors.
     if (sweepCount == 0) {
@@ -94,6 +91,8 @@ class Board with ChangeNotifier {
       _sweep(bottomLeft);
       _sweep(topRight);
       _sweep(bottomRight);
+    } else { 
+      notifyListeners();
     }
 
   }
@@ -145,26 +144,13 @@ class Board with ChangeNotifier {
 
   flag(Point location) {
 
-    if (_gameTimer != null) {
+    if (!mineLocations.isEmpty) {
       if (flagLocations.contains(location)) {
         board[location.x][location.y] = "";
         flagLocations.remove(location);
       } else {
         board[location.x][location.y] = "!";
         flagLocations.add(Point(location.x, location.y));
-
-        /* Incorrectly identifying a mines does not kill you
-        if (flagLocations.length == mines) {
-          for (var i = 0; i < flagLocations.length; i++) {
-            var flagLocation = flagLocations[i];
-            if (!mineLocations.contains(flagLocation)) {
-              _showMines();
-              return;
-            }
-          }
-        }
-        */
-
       }
       notifyListeners();
     }
