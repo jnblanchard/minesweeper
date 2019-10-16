@@ -9,7 +9,8 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   @override
-  Widget build(BuildContext context) => Scaffold(body: Column(children: <Widget>[TopBoard(), GameBoard(), AlterBoard()]));
+  Widget build(BuildContext context) => Scaffold(body: Column(children: <Widget>[TopBoard(), GameBoard(), /*AlterBoard()*/]));
 }
 

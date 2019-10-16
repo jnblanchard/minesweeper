@@ -3,6 +3,10 @@ import 'package:provider/provider.dart';
 import 'package:minesweeper/providers/board.dart';
 
 
+/* TextFields not taking input on flutter-web
+   https://github.com/flutter/flutter/issues/33011
+*/
+
 class AlterBoard extends StatefulWidget {
   @override
   _AlterBoardState createState() => _AlterBoardState();
@@ -16,7 +20,7 @@ class _AlterBoardState extends State<AlterBoard> {
 
   get _padding => Padding(padding: EdgeInsets.all(10));
 
-  Widget _field(TextEditingController controller, String placeholder) => Container(width: 70, child: TextField(controller: controller, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: placeholder)));
+  Widget _field(TextEditingController controller, String placeholder) => Container(width: 70, child: TextField(maxLines: 2, controller: controller, keyboardType: TextInputType.number, decoration: InputDecoration(labelText: placeholder)));
 
   @override
   Widget build(BuildContext context) {
